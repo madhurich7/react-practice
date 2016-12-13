@@ -1,0 +1,19 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "learning react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "practice"
+  ],
+  "author": "madhuri",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "webpack": "^1.13.3"
+  }
+}
