@@ -1,0 +1,81 @@
+1. to update node, npm install -g npm, if it is not already updated(windows)
+ --for MAC sudo npm install -g npm
+ --run npm then it installs the node_modules folder
+
+2. To create a package.json file to install lot of modules.
+--use npm init
+		--we can create package.json, just answer the questions it asks
+
+3. If I already have package.json, then to install a module then we need to use "save"
+		--then use npm install express --save	
+
+4. To install dependencies,
+			--use npm install moduleName --save 
+			--use npm install express --save 
+			all these will be in dependencies in package,json
+
+			DEPENDENCIES ARE USED TO "run" THE PROJECT AND
+			DEV DEPENDENCIES ARE USED TO "build" THE PROJECT
+
+			As a part of build of build process, it does minification 
+			and it does transpilation (converting es2015 to es5)
+			it alsogives jslint, which is used for syntax check in a JS file.
+
+if npm install --save-dev moduleName, then all these modules wil be included in
+devDependencies	
+
+5. For react we need , react and react-dom dependencies
+in devDependencies we need 
+					--babel-core babel-loader babel-preset-es2015 babel-preset-react
+
+6.These dependencies wil be used while executing the project and as a part of build we use devDependencies
+
+7. To run the js file inside of node use "node filename.js" in the command prompt
+
+8. To run complete a application we can use either of the packages like
+webpack, grunt, gulp
+--if you have the access as an administrator in real-time then you can use webpack, webpack-dev-server
+--IT'S ALWAYS BETTER TO INSTALL MODULES IN YOUR PROJECT FOLDER RATHER THAN GLOBALLY,
+
+--npm install will download all the dependencies that are required.
+if you want to install a specific module then you use --npm install moduleName  
+
+9. var is function scoped, and let is block scope
+10. "const" is a key word that is used for values that remain same in the entire program. These can't be changed and if tried then the compiler shows an error.
+
+11. "const" is nothing but the varibale is immutable, i.e they cannot be updated in future.
+
+-----------
+create a new folder "react-project" (you did)
+then create a package.json file using 'npm init' command in that folder path		
+1.npm init
+2.npm install --save react react-dom
+to build the application (this don't have to be done while running)
+3.npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+
+this babel-preset-react is used to transpile jsx syntax to regular javascript 
+
+we need to install some of the modules globally
+
+npm install -g babel webpack webpack-dev-server
+						-->We need to install some modules globally like
+						grunt, grunt-cli, webpack, webpack-dev-server
+						cos inorder to run the things of "build" i.e transpilation
+						and minification, we use these global modules.
+
+	****IN ORDER TO INSTALL ANY MODULE GLOBALLY WE NEED TO HAVE PERMISSION
+	TO RUN AS ADMINISTRATOR, IF YOU DON'T HAVE PERMISSION THEN YOU NEED
+	TO INSTALL THESE MODULES IN EACH OF YOUR PROJECT FOLDER****	
+
+npm install --will download all the dependencies and devDependencies which are in package.json					
+------------------
+While creating a react app, first in the app.js file or what ever you name it
+you need to import 1.react
+					and 2.react-dom
+
+and the class that you write MUST extend React.Component and must be CAPITALIZEDS
+
+render()--this is a method to render the code tht you have written on to the web page
+"babel-preset-react"--this is a plugin that converts jsx to javascript according to the browser	
+
+TO RUN THE APP, USE "webpack-dev-server"

@@ -1,0 +1,84 @@
+IN REACT we have one component and everything else is considered to be child elements, it MUST have exactly one parent element
+POINTS TO NOTE
+>If you have more than one element to render then you must enclose them in a single tag, i.e it should have one parent element, it can't render multiple at a time without having the parent element, because in the background the jsx is converted to js, in js two times React.createElement doesn't work to create multiple elements
+>Other thing is if you want to format that render code by giving preoper indentation and spaces then you need to enclose them in "parenthesis" after your return statement
+
+PROPS and STATE
+when ever we want to pass in some info from parent to the child component through
+the parent component, we use props (it's similar to attribute in html) but it should
+be called as props, and this props should be defined in child component and
+the values are specified in parent component, for this look into line--16
+in main.js i.e parent component, in app.js line 7 and 8 props named, "name" and "age" 
+is defined. (these should be surronded by flower braces because it is a jsx syntax and 
+inorder for browser to compile that to normal js we need to put these braces)
+AND
+In the parent component in main.js, while writing values for these props
+they must be either surrounded by quotes or flower braces ({} braces work just like
+ {{}} in Angular)				
+
+DEFINING TYPE OF PROPS AND DEFAULT PROPS
+we can define the type of property using. Also property can be specified as required if it's a mandatory property by using "isRequired" while decalreing the propTypes
+
+
+
+<appname>.propTypes = { --here it is camelCase, from second word the first letter is capital
+	prop1: React.PropTypes.<datatype> --note the proptypes here it is first letter of each word is capital
+}
+Ex: 
+App.propTypes = {
+	txt: React.PropTypes.string.isRequired,
+	age: React.PropTypes.number
+}
+
+<App txt = "some text" age={34}/>--usage
+{this.props.txt}--in child to define a property
+
+Default property values can also be set, so when ever the property is not specified in the parent component then that default will be used to display on the page
+this can be done as
+
+App.defaultProps = {
+	txt: 'default string here',
+	age: 345
+}
+-------
+DEFINING THE STATE FOR A COMPONENT --look into app.js
+
+	constructor(){
+		super();
+		this.state = {
+			msg: "defining the state fro app component"
+		}
+	}
+to define the state of a component, we need to mention that
+in the constructor by extending the super, i.e super will be included in the constructor that you will be creating.
+
+to set the initial state we use
+
+this.state = {
+			msg: "defining the state fro app component"
+		}
+inside of the constructor
+
+and in the component we defined the update method
+and we are setting the state as follows
+
+this.setState({msg: event.target.value})
+
+what it does is when the update methos is called the msg value will be changed to
+what ever the value that you entered inside the input in the view
+
+from <input onChange={this.update.bind(this)}/>	
+
+
+Inorder to refer the "this" which is defined in update to the current component (ie. the constructor in the component where the msg is defined)unlike the window "this" we are binding our update method's "this" to our onChange event in <input onChange={this.update.bind(this)}/>
+														--if we dont want to write this
+														bind statement here in the input, 
+														we can define it in the constructor like
+
+														constructor(){
+														super();
+														this.state = {
+															msg: "state of current component"
+															}
+															this.update = this.update.bind(this);
+														}								
