@@ -1,0 +1,162 @@
+1. PROPS
+props is something which is accessed or changed using a perent 
+component to the child component. In order to upate or to pass in a 
+new prop the component (basically the child component) MUST depend
+on it's parent component to get those values of its props.
+
+STATE		
+Where as state is something which is dealt within the component and it doens't
+have to depend ANOTHER component for it's state to be changed or accessed
+
+look into app.js line 6
+		this.state = {
+			msg: "defining the state fro app component",
+			name: props.name
+		}
+		where we are setting the initial state of the App Component
+let's take a look into the prop "name", it is initally set to "Madhuri" which
+is defined in 
+		<App name="madhuri" /> in main.js
+So in the initial state the App component's property "name" is "Madhuri"
+AND this name is changed when ever we click on the "p" element in the view
+		in app.js <p onClick ={this.changeName.bind(this)}>{this.state.name}</p>
+		"this in bind(this)" referes to the current App Component
+See all this name changing of the App Component is done inside of the App 
+Component itself and it's no where dependent on other component to change it's state
+
+and by using Reacts "setState" method we are changing the state of the component
+  look line 18 in app.js this.setState({name: "xyz"})
+
+ POINTS TO REMEMBER
+ 1.when you don't declare the initial state as mentioned in line 12 in this file(look above)
+ the onClick event will be triggered but the name prop WILL NOT BE CHANGED this 
+ is because when the name "Madhuri" is displayed the component has an initial
+ state, and when you try to change the name using the click event "THAT PARTICULAR INITIAL
+ STATE IS NOT BEING CHANGED" even though the click event is triggered.
+
+ SO inorder to avoid this WE DEFINE THE INITIAL STATE AND change that state accordingly when
+ an event occurs (in our case) using REact's setState method.
+
+ ---------
+
+2. VIRTUAL DOM
+
+REFER:"https://www.codecademy.com/articles/react-virtual-dom"
+"https://www.youtube.com/watch?v=Iw2BLUjQo1E"
+
+Generally in HTML, we have a DOM and that DOM is same is what ever the 
+technology we use either it may be React, Angular or what ever.
+BUT in React we have a virtual DOM, which means its just like a copy
+of a real DOM (real DOM is what we see on screen). Each DOM object 
+present in real DOM is present in Virtual DOM.
+-- when ever a change is done in the DOM in React, it doesn't directly go
+to the real DOM and change that instead it changes the entire Virtual DOM
+and then compares THIS new Virtual DOM with the old Virtual DOM, if
+it finds any difference between these both, that particular changed element
+will ONLY BE RE-RENDERED in the real DOM. 
+	Ex: in this line <p onClick ={this.changeName.bind(this)}>{this.state.name}</p>
+			in app.js, when ever this "p" element is clicked, the name is changed to "xyz"
+			due to  
+				changeName(event){
+		alert("changeName");
+		this.setState({name: "xyz"});
+	}
+	in the component and only that "p" element will be re-rendered NOT the entire DOM.
+	WE CAN ACTUALLY see this in the browser.
+			goto developer tools--click on three dots appearing vertically in the
+						top right corner--more tools--Rendering
+						then at the bottom after console tab you cna see
+						rendering tab, click on it then select the check box "pain flashing"
+						When an event occurs (onClick, onMouseOver..etc)
+						the element associated to that particular event will only be highlighted
+						in green color.
+
+-----------
+
+3.PropTypes comfigurtion
+In React we can declare before hand what types of properties like
+is it a "string, number, boolean, object, funciton..etc"
+we wanted to use after defining the properties.
+we can configure the proptypes as follows
+<AppName>.propTypes = {
+	prop1: React.PropTypes.number.isRequired,
+	prop2: React.propTypes.string,
+	prop3: React.propTypes.func 
+}
+it is also possible to declare a mandatory property
+by providing that it is "isRequired" property. Look into prop1
+it is a required property. When this prop1 is not defined or not declared
+in its parent component then the compiler will throw an error saying that 
+property is required. So in this way we can configure the properties in React
+
+Ex: look into app.js line 41
+		age: React.PropTypes.number.isRequired
+				--age is aa required property else it will throw an error.
+
+-------------
+
+4.Default Props
+Apart from decalring the property types in REact, we can also
+declare the default values that can be used, if the parent component doesn't 
+provide property values to the child component. This can be done in two ways
+   I. If the child component is created using 
+   				class App extends React.Component this statement
+   				then default properties of this child "App" component
+   				can be decalred as 
+   					App.defaultProps = {
+   						prop1: "default value here"
+   					}
+   					look into line 52 in app.js
+   					App.defaultProps = {
+									age: 54
+						}--> age is defaulted to value "54"
+					So in the parent component i.e in Main
+					if in this line <App name="madhuri/> apart from
+					name="madhuri", if age is not given a value
+					then default value 54 is used.
+    II. Another method of defining the default values for properties 
+    	is, if the child component is created using React.createClass
+    	then to decalre default values we use getDefaultprops method provided by react
+    			look into Country.js file where Country component is decalred using React.createClass and the default values are declared as 
+    					getDefaultProps: function(){
+									return {
+										nationality: 'indian'
+									};
+								}--> here default value for nationality is
+								indian, if in the parent component
+								in this line <Country population={20000}/> nationality is not given a value then default value "indian" is used and gets displayed on screen.
+								But if country provides a value for nationality then the child component's defult value will be overwritten by the value provided by the parent component.
+			--REFER "https://facebook.github.io/react/blog/2013/07/11/react-v0-4-prop-validation-and-default-values.html"
+			"http://react.tips/how-to-use-default-properties-in-react/"	
+
+----------
+5.Managing the state
+A component that have props and event handling, will obviously have an initial state
+and due to that event handlers the props will be changed and the state
+of that component changes, i.e we are changing the state of the component.
+For this we first need to declare the initial state of the component
+this can be done by declaring the object 
+				this.state = {
+					prop1: "some value",
+					prop2: "some value"
+				} 
+				Ex: look into line 6 in app.js
+					this.state = {
+			msg: "defining the state fro app component",
+			name: props.name
+		}--> initial state of App component is set here
+		and when an event like update and changeName occurs
+		this "state" will be changed.
+		When
+		 in the lines <p onClick ={this.changeName.bind(this)}>{this.state.name}</p>
+<input onChange={this.update}/> these events occur the corresponding event handlers get triggered
+and the properties "name" and "msg" will be changed.
+So we are MANAGING THE STATE OF APP COMPONENT 
+------------
+6.Interpolation
+In React everything is JSX which can't be understood by the browser
+so we write javascript and surround them with curly braces, to tell browser that this 
+is a valid javascript and compile it as the regular javascript.
+Adding these braces to the JS expressions is called interpolation,
+any valid JS can be written inside this curly braces. 
+
