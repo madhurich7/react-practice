@@ -159,4 +159,11 @@ so we write javascript and surround them with curly braces, to tell browser that
 is a valid javascript and compile it as the regular javascript.
 Adding these braces to the JS expressions is called interpolation,
 any valid JS can be written inside this curly braces. 
+------------
+9. React Developer tools
+For react we have "React Developer Tools" which is different from
+chrome developer tools use that inorder to debug the app that you have built. To get react dev tools goto
+			"https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi"
+			and add that to your chrome browser, now in the inspect
+			tab when you click, select "react" to debug the app.
 
